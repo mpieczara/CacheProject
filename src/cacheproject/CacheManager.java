@@ -5,20 +5,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Math.E;
+import static javafx.scene.input.KeyCode.T;
+import static javafx.scene.input.KeyCode.V;
+
 public class CacheManager implements Cache {
 
-    CacheItem item;
-    static List<Map<CacheItem, String>> cache = new ArrayList<>();
+    //ItemCreator item = new ItemCreator();
+    static List<Map<Object, String>> cache = new ArrayList<>();
 
     @Override
     public CacheItem cacheItem(Object item, String key) {
-        HashMap<CacheItem, String> itemMap = new HashMap();
-        return null;
+        HashMap<Object, String> itemMap = new HashMap<>();
+        itemMap.put(item, key);
+        cache.add(itemMap);
+        return (CacheItem) item;
     }
 
     @Override
     public void invalidateCache() {
-
+        cache.clear();
     }
 
     @Override
@@ -35,7 +41,9 @@ public class CacheManager implements Cache {
 
         @Override
         public CacheItem getItem(int index) {
-            return null;
+            cache.get(index);
+            Object item = cache.get(index).keySet();
+            return (CacheItem) item;
         }
 
         @Override

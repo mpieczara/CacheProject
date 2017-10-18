@@ -1,6 +1,7 @@
 package cacheproject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
 
@@ -10,12 +11,10 @@ public class Main {
 		CacheItem a = new ItemA();
 		a.getKey();
 		map.put(a, "A");
-		cache.cache.add(map);
 
-		System.out.println(cache.getItem(0));
-
-		System.out.println(cache.getView());
-
+		Map<String, String> singleMap = new HashMap<>();
+		singleMap.put("A", "B");
+		System.out.println(singleMap.keySet());
 
 
 
