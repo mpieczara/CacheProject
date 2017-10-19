@@ -11,13 +11,13 @@ import static javafx.scene.input.KeyCode.V;
 
 public class CacheManager implements Cache {
 
-    //ItemCreator item = new ItemCreator();
-    static List<Map<Object, String>> cache = new ArrayList<>();
+    ItemCreator itema = new ItemCreator();
+    static List<Map<String, Object>> cache = new ArrayList<>();
 
     @Override
     public CacheItem cacheItem(Object item, String key) {
-        HashMap<Object, String> itemMap = new HashMap<>();
-        itemMap.put(item, key);
+        HashMap<String, Object> itemMap = new HashMap<>();
+        itemMap.put(key, item);
         cache.add(itemMap);
         return (CacheItem) item;
     }

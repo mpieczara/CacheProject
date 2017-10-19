@@ -1,23 +1,13 @@
 package cacheproject;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Main {
 
 	public static void main(String[] args) {
 		CacheManager cache = new CacheManager();
-		HashMap<CacheItem, String> map = new HashMap<>();
-		CacheItem a = new ItemA();
-		a.getKey();
-		map.put(a, "A");
+		ItemCreator itemA = new ItemCreator("A", 12);
 
-		Map<String, String> singleMap = new HashMap<>();
-		singleMap.put("A", "B");
-		System.out.println(singleMap.keySet());
-
-
+		CacheItem a = cache.cacheItem(itemA, itemA.getKey());
+		System.out.println(cache.getView());
 
 	}
-
 }
