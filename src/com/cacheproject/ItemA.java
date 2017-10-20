@@ -1,4 +1,4 @@
-package cacheproject;
+package com.cacheproject;
 
 public class ItemA implements CacheItem {
 

@@ -1,4 +1,4 @@
-package cacheproject;
+package com.cacheproject;
 
 public interface CacheItem {
     String getKey(); // zwraca klucz obiektu

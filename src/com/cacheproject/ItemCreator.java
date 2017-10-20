@@ -1,16 +1,9 @@
-package cacheproject;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+package com.cacheproject;
 
 public class ItemCreator implements CacheItem {
 
     String key;
     Object value;
-
-
-    ItemCreator() {}
 
     ItemCreator(String key, Object value) {
         this.key = key;
@@ -24,6 +17,6 @@ public class ItemCreator implements CacheItem {
 
     @Override
     public Object getValue() {
-        return null;
+        return this.value;
     }
 }
