@@ -2,8 +2,18 @@ package com.cacheproject;
 
 public class ItemCreator implements CacheItem {
 
-    String key;
-    Object value;
+    private String key;
+    private Object value;
+
+    private static ItemCreator instance = null;
+    protected ItemCreator() {}
+
+    public static ItemCreator getInstance() {
+        if(instance == null) {
+            instance = new ItemCreator();
+        }
+        return instance;
+    }
 
     ItemCreator(String key, Object value) {
         this.key = key;

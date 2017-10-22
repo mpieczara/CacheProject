@@ -1,28 +1,25 @@
 package com.cacheproject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CacheManager implements Cache {
 
     private final int cacheSize = 3;
-    static List<Map<String, Object>> cache = new ArrayList<>();
+    static List<CacheItem> cache = new ArrayList<>();
 
     @Override
     public CacheItem cacheItem(Object item, String key) {
-        HashMap<String, Object> itemMap = new HashMap<>();
-        itemMap.put(key, item);
 
         if(cache.size() < cacheSize) {
-            cache.add(itemMap);
+            cache.add(new ItemCreator(key, item));
         } else {
-            cache.remove(cacheSize - 1);
-            cache.add(itemMap);
+            cache.remove(0);
+            cache.add(new ItemCreator(key, item));
         }
 
-        return (CacheItem) item;
+        return cache.get(cache.size()-1);
     }
 
     @Override
@@ -32,10 +29,20 @@ public class CacheManager implements Cache {
 
     @Override
     public CacheView getView() {
-        return new CacheViewManager()
-;    }
+        return CacheViewManager.getInstance();
+    }
 
     protected static class CacheViewManager implements CacheView {
+
+        private static CacheViewManager instance = null;
+        protected CacheViewManager() {}
+
+        public static CacheViewManager getInstance() {
+            if(instance == null) {
+                instance = new CacheViewManager();
+            }
+            return instance;
+        }
 
         @Override
         public int size() {
@@ -44,31 +51,20 @@ public class CacheManager implements Cache {
 
         @Override
         public CacheItem getItem(int index) {
-            cache.get(index);
-            Object item = cache.get(index).keySet();
-            return (CacheItem) item;
+            return cache.get(index);
         }
 
         @Override
         public CacheItem getItem(String key) {
-            Object item = null;
-            for (Map<String, Object> map : cache) {
-                item = map.get(key);
-            }
-            return (CacheItem) item;
+            CacheItem item = cache.stream().filter(
+                    object -> object.getKey().equals(key)
+            ).findFirst().get();
+            return item;
         }
 
         public void getAllItems() {
-            cache.forEach(map -> map.entrySet().forEach(v -> System.out.println(v)));
-        }
-
-        public CacheItem getItemsss(String key) {
-            final Object[] item = {null};
-
-            cache.forEach((Map<String, Object> map) -> {
-                item[0] = map.get(key);
-            });
-            return (CacheItem) item[0];
+            System.out.println("Cache items: ");
+            cache.forEach(item -> System.out.print(item.getKey().concat(" ")));
         }
     }
 }
