@@ -1,25 +1,25 @@
 package com.cacheproject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CacheManager implements Cache {
 
     private final int cacheSize = 3;
-    static List<CacheItem> cache = new ArrayList<>();
+    static LinkedMap<String, CacheItem> cache = new LinkedMap<>();
 
     @Override
     public CacheItem cacheItem(Object item, String key) {
 
+        CacheItem castItem = (CacheItem) item;
+
         if(cache.size() < cacheSize) {
-            cache.add(new ItemCreator(key, item));
+            cache.put(key, castItem);
         } else {
             cache.remove(0);
-            cache.add(new ItemCreator(key, item));
+            cache.put(key, castItem);
         }
 
-        return cache.get(cache.size()-1);
+        return castItem;
     }
 
     @Override
@@ -31,6 +31,7 @@ public class CacheManager implements Cache {
     public CacheView getView() {
         return CacheViewManager.getInstance();
     }
+
 
     protected static class CacheViewManager implements CacheView {
 
@@ -51,20 +52,25 @@ public class CacheManager implements Cache {
 
         @Override
         public CacheItem getItem(int index) {
-            return cache.get(index);
+            return cache.getValue(index);
         }
 
         @Override
         public CacheItem getItem(String key) {
-            CacheItem item = cache.stream().filter(
-                    object -> object.getKey().equals(key)
-            ).findFirst().get();
+            CacheItem item = cache.entrySet().stream()
+                    .filter(map -> map.getKey().equals(key))
+                    .map(map -> map.getValue()).findFirst().get();
+
             return item;
         }
 
         public void getAllItems() {
-            System.out.println("Cache items: ");
-            cache.forEach(item -> System.out.print(item.getKey().concat(" ")));
+            String currentCache = cache.entrySet().stream()
+                    .map(map -> map.getKey())
+                    .collect(Collectors.joining(", "));
+
+            System.out.println("Cache items: " +"\n" + currentCache);
+
         }
     }
 }

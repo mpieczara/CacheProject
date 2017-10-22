@@ -1,13 +1,13 @@
 package com.cacheproject;
 
-public class ItemA implements CacheItem {
+public class ItemC implements CacheItem {
 
     private String key;
     private Object value;
 
-    ItemA(){}
+    ItemC(){}
 
-    ItemA(String key, Object value) {
+    ItemC(String key, Object value) {
         this.key = key;
         this.value = value;
     }
