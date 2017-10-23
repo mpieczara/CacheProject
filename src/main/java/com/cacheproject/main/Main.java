@@ -1,4 +1,10 @@
-package com.cacheproject;
+package com.cacheproject.main;
+
+import com.cacheproject.cache.CacheManager;
+import com.cacheproject.items.ItemA;
+import com.cacheproject.items.ItemB;
+import com.cacheproject.items.ItemC;
+import com.cacheproject.items.ItemD;
 
 public class Main {
 

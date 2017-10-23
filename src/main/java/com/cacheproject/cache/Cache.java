@@ -1,4 +1,4 @@
-package com.cacheproject;
+package com.cacheproject.cache;
 
 public interface Cache {
     CacheItem cacheItem(Object item, String key);//zapisuje obiekt w Cache’u

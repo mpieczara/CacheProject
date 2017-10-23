@@ -1,4 +1,4 @@
-package com.cacheproject;
+package com.cacheproject.cache;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

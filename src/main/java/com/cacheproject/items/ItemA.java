@@ -1,4 +1,6 @@
-package com.cacheproject;
+package com.cacheproject.items;
+
+import com.cacheproject.cache.CacheItem;
 
 public class ItemA implements CacheItem {
 
@@ -7,7 +9,7 @@ public class ItemA implements CacheItem {
 
     ItemA(){}
 
-    ItemA(String key, Object value) {
+    public ItemA(String key, Object value) {
         this.key = key;
         this.value = value;
     }

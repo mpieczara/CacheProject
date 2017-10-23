@@ -1,4 +1,4 @@
-package com.cacheproject;
+package com.cacheproject.cache;
 
 public interface CacheView {
     int size();//zwraca wielkość Cache’a

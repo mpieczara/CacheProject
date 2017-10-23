@@ -1,4 +1,4 @@
-package com.cacheproject;
+package com.cacheproject.cache;
 
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -34,7 +34,7 @@ public class CacheManager implements Cache {
     }
 
 
-    protected static class CacheViewManager implements CacheView {
+    public static class CacheViewManager implements CacheView {
 
         private static CacheViewManager instance = null;
         protected CacheViewManager() {}
@@ -66,8 +66,7 @@ public class CacheManager implements Cache {
 
                 return item;
             } catch(NoSuchElementException e) {
-                System.out.println("Element with specified key does not exist in cache.");
-                return null;
+                throw new NoSuchElementException("Element with specified key does not exist in cache.");
             }
         }
 
