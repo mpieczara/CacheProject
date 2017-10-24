@@ -1,5 +1,7 @@
 package com.cacheproject.cache;
 
+import com.cacheproject.items.CacheItem;
+
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 

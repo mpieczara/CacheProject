@@ -1,7 +1,5 @@
 package com.cacheproject.items;
 
-import com.cacheproject.cache.CacheItem;
-
 public class ItemC implements CacheItem {
 
     private String key;

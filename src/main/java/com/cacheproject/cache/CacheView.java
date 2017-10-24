@@ -1,7 +1,9 @@
 package com.cacheproject.cache;
 
+import com.cacheproject.items.CacheItem;
+
 public interface CacheView {
-    int size();//zwraca wielkość Cache’a
-    CacheItem getItem(int index);//zwraca obiekt o podanym indeksie
-    CacheItem getItem(String key);//zwraca obiekt o podanym kluczu
+    int size();
+    CacheItem getItem(int index);
+    CacheItem getItem(String key);
 }

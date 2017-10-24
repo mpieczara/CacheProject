@@ -1,5 +1,4 @@
 package com.cacheproject.items;
-import com.cacheproject.cache.CacheItem;
 
 public class ItemD implements CacheItem {
 
