@@ -1,10 +1,7 @@
 package com.cacheproject.main;
 
 import com.cacheproject.cache.CacheManager;
-import com.cacheproject.items.ItemA;
-import com.cacheproject.items.ItemB;
-import com.cacheproject.items.ItemC;
-import com.cacheproject.items.ItemD;
+import com.cacheproject.items.*;
 
 public class Main {
 
@@ -12,28 +9,43 @@ public class Main {
 
 		CacheManager cache = new CacheManager();
 		CacheManager.CacheViewManager cacheView = (CacheManager.CacheViewManager) cache.getView();
+		int cacheSize;
 
 		ItemA objA = new ItemA("A", "itemA");
 		ItemB objB = new ItemB("B", "itemB");
 		ItemC objC = new ItemC("C", "itemC");
 		ItemD objD = new ItemD("D", "itemD");
 
+		CacheItem[] itemTbl = new CacheItem[]{objA, objB, objC, objD};
 
-		System.out.println(cache.cacheItem(objA, objA.getKey()));
+		/*
+		 * Save all item in cache using cacheItem() method
+		 * For each iteration call getAllItems() and size() method
+		 */
+		for(CacheItem item : itemTbl) {
+			cache.cacheItem(item, item.getKey());
+			cacheView.getAllItems();
+			cacheSize = cacheView.size();
+			System.out.println("Size: " + cacheSize);
+		}
+
+		System.out.println();
+
+		System.out.println("Get item by index: ");
+		CacheItem item1 = cacheView.getItem(0);
+		System.out.println(item1);
+		System.out.println();
+
+		System.out.println("Get item by key: ");
+		CacheItem item2 = cacheView.getItem("C");
+		System.out.println(item2);
+		System.out.println();
+
+
+		System.out.println("Clear cache.");
+		cache.invalidateCache();
+		System.out.println();
 		cacheView.getAllItems();
-		System.out.println(cacheView.size());
-		System.out.println(cache.cacheItem(objB, objB.getKey()));
-		cacheView.getAllItems();
-		System.out.println(cacheView.size());
-		System.out.println(cache.cacheItem(objC, objC.getKey()));
-		cacheView.getAllItems();
-		System.out.println(cacheView.size());
-		System.out.println(cache.cacheItem(objD, objD.getKey()));
-		cacheView.getAllItems();
-		System.out.println(cacheView.size());
-		System.out.println(cacheView.getItem(2));
-		System.out.println(cacheView.getItem(2));
-		System.out.println(cacheView.getItem("B"));
-		System.out.println(cacheView.getItem("dasdas"));
+		System.out.println("Cache size after invalidation: " + cacheView.size());
 	}
 }

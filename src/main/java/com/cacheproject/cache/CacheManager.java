@@ -50,7 +50,8 @@ public class CacheManager implements Cache {
 
         @Override
         public int size() {
-            return cache.size();
+            int size = cache.size();
+            return size;
         }
 
         @Override
@@ -77,7 +78,7 @@ public class CacheManager implements Cache {
                     .map(map -> map.getKey())
                     .collect(Collectors.joining(", "));
 
-            System.out.println("Cache items: " +"\n" + currentCache);
+            System.out.println("Current cache state: " +"[ " + currentCache +" ]");
 
         }
     }

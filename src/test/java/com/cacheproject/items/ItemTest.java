@@ -1,10 +1,7 @@
 package com.cacheproject.items;
 
-import com.cacheproject.items.ItemA;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ItemTest {
 

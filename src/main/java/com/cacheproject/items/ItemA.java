@@ -5,8 +5,6 @@ public class ItemA implements CacheItem {
     private String key;
     private Object value;
 
-    ItemA(){}
-
     public ItemA(String key, Object value) {
         this.key = key;
         this.value = value;
